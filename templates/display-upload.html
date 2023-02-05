@@ -1,0 +1,41 @@
+{% extends "account/base.html" %}
+{% load socialaccount %}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+{% block content %}
+
+<body>
+
+    <div class="col-md-3" style="margin: auto;">
+        <form method="POST" action="{% url 'display-images' %}" '>
+            {% csrf_token %}
+            <div class="form-outline mb-4">
+
+                <input type="text" name="event_id" class="form-control" minlength="1" maxlength="30" required
+                    id="event_id">
+                <label class="form-label" for="event_id">Event ID</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary mb-4">Submit</button>
+        </form>
+    </div>
+    <hr>
+    {% for photo in photos %}
+    <img src="{{ photo.images.url }}" alt="">
+    {% endfor %}
+    <script src="" async defer></script>
+</body>
+{% endblock %}
+
+</html>

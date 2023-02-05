@@ -5,6 +5,6 @@ from . import views
 
 
 urlpatterns = [
-    path("upload", views.upload, name="upload"),
     path("", views.home, name="home"),
+    path('display-images', views.display_upload, name='display-images')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -5,11 +5,8 @@ from accounts.models import Account
 import shortuuid
 
 # Create your views here.
+
 def home(request):
-    return render(request, "index.html")
-
-
-def upload(request):
 
     if request.method == "POST":
         images = request.FILES.getlist("images")
@@ -25,4 +22,15 @@ def upload(request):
             )
             new_image.save()
 
-    return render(request, "index-upload.html")
+    return render(request, "index.html")
+
+def display_upload(request):
+    context = {}
+    if request.method == 'POST':
+        event_id = request.POST['event_id']
+        photo = ImageUpload.objects.filter(event_id=event_id)
+
+        return render(request, 'display-upload.html', {'photos': photo} )
+
+    return render(request, 'display-upload.html')
+

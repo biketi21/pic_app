@@ -20,7 +20,7 @@
     {% if user.is_authenticated %}
     <p>Welcome, you are logged in as user {{ user.firstname }}</p>
     <div class="col-md-3">
-        <form method="POST" action="{% url 'upload' %}" enctype='multipart/form-data'>
+        <form method="POST" action="{% url 'home' %}" enctype='multipart/form-data'>
             {% csrf_token %}
             <!-- Magnet Link input -->
             <div class=" form-outline mb-4">
