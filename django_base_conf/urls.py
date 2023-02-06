@@ -22,5 +22,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
     path("auth/", include("allauth.urls")),
+    path('auth/complete-profile', views.complete_profile, name='complete-profile'),
     path("", include("mainapp.urls")),
 ]

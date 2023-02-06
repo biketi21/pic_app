@@ -87,6 +87,8 @@ TEMPLATES = [
     },
 ]
 
+ACCOUNT_ADAPTER = 'accounts.adapter.AccountAdapter'
+
 WSGI_APPLICATION = "django_base_conf.wsgi.application"
 AUTH_USER_MODEL = "accounts.Account"
 
@@ -133,7 +135,7 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_PORT = env("EMAIL_PORT")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")

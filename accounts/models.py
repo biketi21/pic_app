@@ -49,3 +49,20 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return str(self.email)
+
+
+
+class BrandInfo(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.PROTECT)
+    brand_name = models.CharField(max_length=30)
+    brand_tagline = models.CharField(max_length=100)
+    brand_logo = models.ImageField(upload_to='media')
+    brand_address = models.CharField(max_length=50)
+    brand_phone = models.CharField(max_length=15)
+    brand_email = models.EmailField()
+    instagram_profile = models.URLField()
+
+    def __str__(self):
+        return str(self.brand_name)
+
+
