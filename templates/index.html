@@ -1,6 +1,7 @@
 {% extends "account/base.html" %}
 {% load socialaccount %}
 
+
 <!DOCTYPE html>
 <html>
 
@@ -13,15 +14,38 @@
     <link rel="stylesheet" href="">
 </head>
 {% block content %}
+
 <body>
-    <h1>Auth Demo</h1>
+    <h1>Home</h1>
     {% if user.is_authenticated %}
     <p>Welcome, you are logged in as user {{ user.firstname }}</p>
-    {% else %}
-    <a href="{% provider_login_url 'google' %} ">Login with Google.</a>
-    {% endif %}
+    <div class="col-md-3">
+        <form method="POST" action="{% url 'upload' %}" enctype='multipart/form-data'>
+            {% csrf_token %}
+            <!-- Magnet Link input -->
+            <div class=" form-outline mb-4">
+                <input type="file" name='images' required id="images_upload" class="form-control" multiple
+                    accept="image/*" />
+                <label class="form-label" for="images_upload"></label>
+            </div>
+            <div class="form-outline mb-4">
+
+                <input type="text" name="event_name" class="form-control" minlength="1" maxlength="30" required
+                    id="event_name">
+                <label class="form-label" for="event_name">Event Name</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary mb-4">Submit</button>
+        </form>
+
+        {% else %}
+        <a href="{% provider_login_url 'google' %} ">Login with Google.</a>
+        {% endif %}
+    </div>
+    <hr>
 
     <script src="" async defer></script>
 </body>
 {% endblock %}
+
 </html>

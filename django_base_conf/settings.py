@@ -28,12 +28,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY', default="django-insecure-$7n^4x0qdz_u1b3+)-qolc0%@q^4-o3hc1j(9(vsdms2jq7ehz")
+SECRET_KEY = env(
+    "SECRET_KEY",
+    default="django-insecure-$7n^4x0qdz_u1b3+)-qolc0%@q^4-o3hc1j(9(vsdms2jq7ehz",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -48,6 +51,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     # created apps
     "accounts",
+    "mainapp",
     # third party apps
     "allauth",
     "allauth.account",
@@ -91,10 +95,18 @@ AUTH_USER_MODEL = "accounts.Account"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
+    "default1": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-    }
+    },
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "picapp_db",
+        "USER": "elgon",
+        "PASSWORD": "elgon_db",
+        "HOST": "127.0.0.1",
+        "PORT": "3306",
+    },
 }
 
 
@@ -122,10 +134,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = env('EMAIL_HOST')
-EMAIL_PORT = env('EMAIL_PORT')
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 
 ACCOUNT_EMAIL_VERIFICATION = True
@@ -172,6 +184,8 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
