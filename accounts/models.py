@@ -1,4 +1,5 @@
 from django.db import models
+from shortuuid.django_fields import ShortUUIDField
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
@@ -6,6 +7,10 @@ from django.contrib.auth.models import (
 )
 
 # Create your models here.
+
+
+def user_directory_path(instance, filename):
+    return "user_{0}/{1}/{2}".format(instance.user.id, 'brand', filename)
 
 
 class AccountManager(BaseUserManager):
@@ -34,6 +39,13 @@ class AccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser, PermissionsMixin):
+    id = ShortUUIDField(
+        length=6,
+        max_length=128,
+        prefix="id_",
+        alphabet="abcDEfG7890",
+        primary_key=True,
+    )
     firstname = models.CharField(max_length=30)
     email = models.EmailField(max_length=30, unique=True)
     date_joined = models.DateTimeField(auto_now_add=True)
@@ -51,12 +63,11 @@ class Account(AbstractBaseUser, PermissionsMixin):
         return str(self.email)
 
 
-
 class BrandInfo(models.Model):
     user = models.ForeignKey(Account, on_delete=models.PROTECT)
     brand_name = models.CharField(max_length=30)
     brand_tagline = models.CharField(max_length=100)
-    brand_logo = models.ImageField(upload_to='media')
+    brand_logo = models.ImageField(upload_to=user_directory_path)
     brand_address = models.CharField(max_length=50)
     brand_phone = models.CharField(max_length=15)
     brand_email = models.EmailField()
@@ -64,5 +75,3 @@ class BrandInfo(models.Model):
 
     def __str__(self):
         return str(self.brand_name)
-
-
