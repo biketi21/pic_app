@@ -1,3 +1,10 @@
 {
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "off",
+    "terminal.integrated.automationProfile.linux": {},
+    "terminal.integrated.fontSize": 12,
+    "terminal.integrated.minimumContrastRatio": 21,
+    "terminal.integrated.fontWeight": "normal",
+    "editor.fontFamily": "'FreeMono Bold'",
+    "terminal.integrated.fontFamily": "monospace",
+    "terminal.integrated.cursorStyle": "underline",
 }
